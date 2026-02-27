@@ -1,1 +1,3 @@
-# Todo Project 
+# Todo Project
+
+This is a simple Todo List application.
