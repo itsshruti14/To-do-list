@@ -6,7 +6,6 @@ function App() {
 
     const API_URL = "http://localhost:8080/todos";
 
-    // Load todos on page load
     useEffect(() => {
         fetch(API_URL)
             .then(res => res.json())
@@ -14,7 +13,6 @@ function App() {
             .catch(err => console.error(err));
     }, []);
 
-    // Add todo
     const addTodo = () => {
         if (!input.trim()) return;
 
@@ -33,34 +31,32 @@ function App() {
             });
     };
 
-    // Delete
     const deleteTodo = (id) => {
         fetch(`${API_URL}/${id}`, { method: "DELETE" })
-            .then(() => {
-                setTodos(todos.filter(todo => todo.id !== id));
-            });
+            .then(() => setTodos(todos.filter(todo => todo.id !== id)));
     };
 
-    // Toggle
     const toggleTodo = (todo) => {
         fetch(`${API_URL}/${todo.id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                ...todo,
-                completed: !todo.completed
-            })
+            body: JSON.stringify({ ...todo, completed: !todo.completed })
         })
             .then(res => res.json())
-            .then(updated => {
-                setTodos(
-                    todos.map(t => t.id === updated.id ? updated : t)
-                );
-            });
+            .then(updated => setTodos(todos.map(t => t.id === updated.id ? updated : t)));
     };
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div
+            style={{
+                padding: "20px",
+                minHeight: "100vh",
+                backgroundImage: `url("/bg.jpg")`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+            }}
+        >
             <h2>Todo App</h2>
 
             <input
@@ -73,18 +69,16 @@ function App() {
             <ul>
                 {todos.map(todo => (
                     <li key={todo.id}>
-            <span
-                onClick={() => toggleTodo(todo)}
-                style={{
-                    textDecoration: todo.completed ? "line-through" : "none",
-                    cursor: "pointer"
-                }}
-            >
-              {todo.title}
-            </span>
-                        <button onClick={() => deleteTodo(todo.id)}>
-                            Delete
-                        </button>
+                        <span
+                            onClick={() => toggleTodo(todo)}
+                            style={{
+                                textDecoration: todo.completed ? "line-through" : "none",
+                                cursor: "pointer"
+                            }}
+                        >
+                            {todo.title}
+                        </span>
+                        <button onClick={() => deleteTodo(todo.id)}>Delete</button>
                     </li>
                 ))}
             </ul>

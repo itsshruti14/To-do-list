@@ -1,392 +1,124 @@
-
-
-Day 1 Git Fundamentals
-
-
-
-Topics Learned
-
-What is Git
-
-Working directory vs staging vs commit
-
-Local vs remote repository
-
-Basic branching
-
-
-
-Commands Practiced
-
-
-
-git init
-
-git status
-
-git add .
-
-git commit -m "message"
-
-git log
-
-git branch
-
-git checkout -b branch-name
-
-git merge branch-name
-
-git remote add origin <url>
-
-git push -u origin main
-
-git pull
-
-
-
-Tasks Completed
-
-Created folder todo-project
-
-Initialized Git
-
-Created README file
-
-Made meaningful commits
-
-Pushed project to GitHub
-
-
+A full-stack Todo application built with Spring Boot (backend), PostgreSQL (database), and React (frontend).
 
 ---
 
+#Technologies Used
 
-
-Day 2 Spring Boot Basics
-
-
-
-Dependencies Used
-
-Spring Web
-
-Spring Data JPA
-
-PostgreSQL Driver
-
-Lombok
-
-
-
-Concepts Learned
-
-Project structure
-
-SpringBootApplication
-
-RestController
-
-GetMapping
-
-
-
-Test API
-
-
-
-GetMapping("/hello")
-
-public String hello() {
-
-return "Hello Students";
-
-}
-
-
+Backend: Spring Boot, Spring Data JPA  
+Database: PostgreSQL  
+Frontend: React, Fetch API  
+Other:Lombok, CORS configuration  
 
 ---
 
+# Features
 
-
-Day 3 PostgreSQL and JPA Setup
-
-
-
-Installed PostgreSQL
-
-Created database
-
-
-
-CREATE DATABASE todo\_db;
-
-
-
-Configured application.properties
-
-
-
-spring.datasource.url=jdbc:postgresql://localhost:5432/todo\_db
-
-spring.datasource.username=postgres
-
-spring.datasource.password=yourpassword
-
-spring.jpa.hibernate.ddl-auto=update
-
-spring.jpa.show-sql=true
-
-
-
-Concepts Learned
-
-JPA
-
-Entity
-
-Id
-
-GeneratedValue
-
-ddl auto
-
-
-
-Created Todo Entity with fields
-
-id Long
-
-title String
-
-completed Boolean
-
-
-
-Verified table creation in PostgreSQL
-
-
+- Create, read, update, and delete todos  
+- Toggle completed status  
+- Full integration between frontend and backend  
+- Data persisted in PostgreSQL  
 
 ---
 
+# API Endpoints
 
+- GET  /todos — Get all todos  
+- GET  /todos/{id} — Get todo by ID  
+- POST  /todos — Create a new todo  
+- PUT  /todos/{id} — Update a todo  
+- DELETE /todos/{id} — Delete a todo  
 
-Day 4 Backend CRUD Implementation
+Example JSON for POST /todos:
 
-
-
-Concepts Learned
-
-JpaRepository
-
-PostMapping
-
-GetMapping
-
-PutMapping
-
-DeleteMapping
-
-PathVariable
-
-RequestBody
-
-
-
-Implemented APIs
-
-
-
-POST /todos
-
-GET /todos
-
-GET /todos/{id}
-
-PUT /todos/{id}
-
-DELETE /todos/{id}
-
-
-
----
-
-
-
-Day 5 API Testing Using Postman
-
-
-
-Concepts Learned
-
-HTTP methods
-
-Status codes
-
-JSON request body
-
-Headers
-
-
-
-Example JSON
-
-
-
+```json
 {
-
-"title": "Learn Spring Boot",
-
-"completed": false
-
+  "title": "Learn Spring Boot",
+  "completed": false
 }
+Example JSON for POST /todos:
 
-
-
-Verified data storage in PostgreSQL
-
-Verified update and delete functionality
-
-
-
----
-
-
-
-Day 6 React Basics
-
-
-
-Created React app using
-
-
-
-npx create-react-app todo-frontend
-
-
-
-Concepts Learned
-
-Components
-
-useState
-
-useEffect
-
-Forms
-
-Fetch API
-
-
-
-Built basic UI with
-
-Input field
-
-Add button
-
-Display list
-
-
-
-Used local state only
-
-
+```json
+{
+  "title": "Learn Spring Boot",
+  "completed": false
+}
+````
 
 ---
 
+# How to Run Backend
 
+1. Open project in **IntelliJ IDEA**
+2. Install PostgreSQL and create database:
 
-Day 7 Connect React to Backend
+```sql
+CREATE DATABASE todo_db;
+```
 
+3. Update `application.properties`:
 
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/todo_db
+spring.datasource.username=postgres
+spring.datasource.password=yourpassword
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
 
-Enabled CORS in backend
-
-
-
-CrossOrigin(origins = "\[http://localhost:3000](http://localhost:3000)")
-
-
-
-Connected APIs using fetch
-
-
-
-Implemented
-
-Load todos on page load
-
-Add todo
-
-Delete todo
-
-Toggle completed
-
-
-
-Verified full integration between frontend and backend
-
-
+4. Run Spring Boot application
+5. Access backend: [http://localhost:8080/todos](http://localhost:8080/todos)
 
 ---
 
+# How to Run Frontend
 
+1. Navigate to frontend folder:
 
-API Endpoints
-
-
-
-GET /todos
-
-GET /todos/{id}
-
-POST /todos
-
-PUT /todos/{id}
-
-DELETE /todos/{id}
-
-
-
----
-
-
-
-How To Run Backend
-
-
-
-Open project in IntelliJ
-
-Configure PostgreSQL
-
-Update application.properties
-
-Run Spring Boot application
-
-Access \[http://localhost:8080/todos](http://localhost:8080/todos)
-
-
-
----
-
-
-
-How To Run Frontend
-
-
-
+```bash
 cd todo-frontend
+```
 
+2. Install dependencies:
+
+```bash
 npm install
+```
 
+3. Start React app:
+
+```bash
 npm start
+```
 
+4. Open app: [http://localhost:3000](http://localhost:3000)
 
+---
 
-Open \[http://localhost:3000](http://localhost:3000)
+## Git Workflow
 
+Basic commands used:
 
+```bash
+git init
+git status
+git add .
+git commit -m "message"
+git log
+git branch
+git checkout -b branch-name
+git merge branch-name
+git remote add origin <url>
+git push -u origin main
+git pull
+```
 
+---
 
+## Notes
 
+* Backend server runs on port 8080
+* Frontend server runs on port 3000
+* Ensure **CORS** is enabled in backend:
+
+```java
+@CrossOrigin(origins = "http://localhost:3000")

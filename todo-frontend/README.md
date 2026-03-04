@@ -1,70 +1,124 @@
-# Getting Started with Create React App
+A full-stack Todo application built with Spring Boot (backend), PostgreSQL (database), and React (frontend).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+#Technologies Used
 
-In the project directory, you can run:
+Backend:** Spring Boot, Spring Data JPA  
+Database:** PostgreSQL  
+Frontend:** React, Fetch API  
+Other:** Lombok, CORS configuration  
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Create, read, update, and delete todos  
+- Toggle completed status  
+- Full integration between frontend and backend  
+- Data persisted in PostgreSQL  
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# API Endpoints
 
-### `npm run build`
+- GET  /todos — Get all todos  
+- GET  /todos/{id} — Get todo by ID  
+- POST  /todos — Create a new todo  
+- PUT  /todos/{id} — Update a todo  
+- DELETE /todos/{id} — Delete a todo  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Example JSON for POST /todos:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```json
+{
+  "title": "Learn Spring Boot",
+  "completed": false
+}
+Example JSON for POST /todos:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```json
+{
+  "title": "Learn Spring Boot",
+  "completed": false
+}
+````
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## How to Run Backend
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Open project in **IntelliJ IDEA**
+2. Install PostgreSQL and create database:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```sql
+CREATE DATABASE todo_db;
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Update `application.properties`:
 
-## Learn More
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/todo_db
+spring.datasource.username=postgres
+spring.datasource.password=yourpassword
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+4. Run Spring Boot application
+5. Access backend: [http://localhost:8080/todos](http://localhost:8080/todos)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## How to Run Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Navigate to frontend folder:
 
-### Analyzing the Bundle Size
+```bash
+cd todo-frontend
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2. Install dependencies:
 
-### Making a Progressive Web App
+```bash
+npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+3. Start React app:
 
-### Advanced Configuration
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+4. Open app: [http://localhost:3000](http://localhost:3000)
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Git Workflow
 
-### `npm run build` fails to minify
+Basic commands used:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+git init
+git status
+git add .
+git commit -m "message"
+git log
+git branch
+git checkout -b branch-name
+git merge branch-name
+git remote add origin <url>
+git push -u origin main
+git pull
+```
+
+---
+
+## Notes
+
+* Backend server runs on **port 8080**
+* Frontend server runs on **port 3000**
+* Ensure **CORS** is enabled in backend:
+
+```java
+@CrossOrigin(origins = "http://localhost:3000")
